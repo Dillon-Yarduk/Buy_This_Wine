@@ -23,12 +23,6 @@ ActiveRecord::Schema.define(version: 2021_11_19_000128) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
-  create_table "order_statuses", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "orders", force: :cascade do |t|
     t.decimal "subtotal"
     t.decimal "gst"
@@ -56,6 +50,12 @@ ActiveRecord::Schema.define(version: 2021_11_19_000128) do
     t.string "name"
     t.string "province"
     t.string "country"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
