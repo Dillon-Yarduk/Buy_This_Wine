@@ -14,22 +14,22 @@ fileName = Rails.root.join("db/wines.csv")
 csv_data = File.read(fileName)
 wines = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
-wines.each do |wine|
-  variety = Variety.find_or_create_by(name: wine["variety"])
+wines.each do |w|
+  variety = Variety.find_or_create_by(name: w["variety"])
 
-  winery = Winery.find_or_create_by(name: wine["winery"])
+  winery = Winery.find_or_create_by(name: w["winery"])
 
-  region = Region.find_by(name: wine["region"])
-  region ||= Region.create(name:     wine["region"],
-                           province: wine["province"],
-                           country:  wine["country"])
+  region = Region.find_by(name: w["region"])
+  region ||= Region.create(name:     w["region"],
+                           province: w["province"],
+                           country:  w["country"])
 
   next unless variety&.valid? && winery&.valid? && region&.valid?
 
   wine = Wine.create(
-    name:        wine["name"],
-    description: wine["description"],
-    price:       wine["price"],
+    name:        w["name"],
+    description: w["description"],
+    price:       w["price"],
     variety:     variety,
     winery:      winery,
     region:      region
@@ -37,9 +37,31 @@ wines.each do |wine|
 end
 
 puts Wine.count
-
 puts Variety.count
-
 puts Winery.count
-
 puts Region.count
+
+fileName = Rails.root.join("db/provinces.csv")
+csv_data = File.read(fileName)
+provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+
+provinces.each do |p|
+  province = Province.create(
+    name: p["name"],
+    pst:  p["pst"],
+    gst:  p["gst"],
+    hst:  p["hst"]
+  )
+end
+
+puts Province.count
+
+statuses = ["pending", "paid", "shipped"]
+
+statuses.each do |s|
+  status = Status.create(
+    name: s
+  )
+end
+
+Status.count
