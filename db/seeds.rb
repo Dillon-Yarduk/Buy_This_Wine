@@ -14,7 +14,7 @@ fileName = Rails.root.join("db/wines.csv")
 csv_data = File.read(fileName)
 wines = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
-wines.each do |w|
+wines.first(150).each do |w|
   variety = Variety.find_or_create_by(name: w["variety"])
 
   winery = Winery.find_or_create_by(name: w["winery"])
@@ -34,6 +34,12 @@ wines.each do |w|
     winery:      winery,
     region:      region
   )
+  query = URI.encode_www_form_component(["wine bottle"].join(","))
+  downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
+  wine.image.attach(io:       downloaded_image,
+                    filename: "m-#{[wine.name,
+                                    variety.name].join('-')}.jpg")
+  sleep(1)
 end
 
 puts Wine.count
