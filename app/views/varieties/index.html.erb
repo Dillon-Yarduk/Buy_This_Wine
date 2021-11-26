@@ -1,2 +1,8 @@
-<h1>Varieties#index</h1>
-<p>Find me in app/views/varieties/index.html.erb</p>
+<h1>Varieties</h1>
+<ul>
+  <% @varieties.each do |variety| %>
+    <li>
+      <%= link_to variety.name, variety %>
+    </li>
+  <% end %>
+</ul>

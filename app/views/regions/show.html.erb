@@ -1,2 +1,10 @@
-<h1>Regions#show</h1>
-<p>Find me in app/views/regions/show.html.erb</p>
+<h1><%= "#{@region.name}, #{@region.province}, #{@region.country}" %></h1>
+
+<strong>Wines:</strong>
+<ul>
+  <% @region.wines.each do |wine| %>
+    <li><%= link_to "#{wine.name}, #{wine.variety.name}", wine %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', regions_path %>

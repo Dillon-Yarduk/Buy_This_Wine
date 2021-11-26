@@ -1,2 +1,10 @@
-<h1>Varieties#show</h1>
-<p>Find me in app/views/varieties/show.html.erb</p>
+<h1><%= "#{@variety.name}" %></h1>
+
+<strong>Wines:</strong>
+<ul>
+  <% @variety.wines.each do |wine| %>
+    <li><%= link_to "#{wine.name}", wine %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', varieties_path %>

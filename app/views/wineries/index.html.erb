@@ -1,2 +1,8 @@
-<h1>Wineries#index</h1>
-<p>Find me in app/views/wineries/index.html.erb</p>
+<h1>Wineries</h1>
+<ul></ul>
+  <% @wineries.each do |winery| %>
+    <li>
+      <%= link_to winery.name, winery %>
+    </li>
+  <% end %>
+</ul>
