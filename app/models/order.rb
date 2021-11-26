@@ -3,4 +3,5 @@ class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :status
   has_many :wine_orders
+  has_many :wines, through: :wine_orders
 end

@@ -1,6 +1,6 @@
 class WinesController < ApplicationController
   def index
-    @wines = Wine.includes(:variety, :winery, :region).all
+    @wines = Wine.includes(:variety, :winery, :region).page(params[:page])
   end
 
   def show
