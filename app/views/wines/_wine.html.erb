@@ -2,8 +2,8 @@
   <% if wine.image.present? %>
     <p><%= image_tag wine.image.variant(resize_to_limit: [285, 285]).processed  %></p>
   <% end %>
-  <h3><%= link_to "#{wine.name}, #{wine.variety.name}", wine %></h3>
-  <h4><%= wine.winery.name %></h4>
+  <h3><%= link_to wine.name, wine %><%= ", #{wine.variety.name}" %></h3>
+  <h4><%= link_to wine.winery.name, wine.winery %></h4>
   <p>Price: <%= number_to_currency wine.price / 100.0 %></p>
   <p><%= wine.description %></p>
 </div>

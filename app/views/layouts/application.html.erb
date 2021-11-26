@@ -12,6 +12,14 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav">
+      <li class="nav-item nav-link"><%= link_to 'Wines', root_path %></li>
+      <li class="nav-item nav-link"><%= link_to 'Varieties', varieties_path %></li>
+      <li class="nav-item nav-link"><%= link_to 'Wineries', wineries_path %></li>
+      <li class="nav-item nav-link"><%= link_to 'Regions', regions_path %></li>
+    </ul>
+  </nav>
     <%= yield %>
   </body>
 </html>

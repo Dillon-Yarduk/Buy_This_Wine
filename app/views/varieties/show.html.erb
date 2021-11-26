@@ -1,10 +1,7 @@
 <h1><%= "#{@variety.name}" %></h1>
 
-<strong>Wines:</strong>
-<ul>
-  <% @variety.wines.each do |wine| %>
-    <li><%= link_to "#{wine.name}", wine %></li>
-  <% end %>
-</ul>
+<% @variety.wines.each do |wine| %>
+  <%= render wine %>
+<% end %>
 
 <%= link_to 'Back', varieties_path %>
