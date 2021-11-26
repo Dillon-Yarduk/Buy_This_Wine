@@ -1,0 +1,12 @@
+<% content_for(:searched_variety_id) { params[:variety_id] }  %>
+<% content_for(:searched_keywords) { params[:keywords] }  %>
+
+<% variety =  Variety.find(params[:variety_id]) unless params[:variety_id] == '' %>
+
+<p>
+  Found <%= pluralize(@wines.count, 'Wines') %> when searching <%= " for, '#{params[:keywords]}'" unless params[:keywords] == '' %>
+  <%= ' in, ' + (params[:variety_id] != '' ? variety.name : "All Varieties") %>
+</p>
+<%= render @wines %>
+
+<%= link_to 'Back to Wines', wines_path %>

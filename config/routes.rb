@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   get 'wineries/show'
   get 'varieties/index'
   get 'varieties/show'
-  resources :wines, only: %i[index show]
+  resources :wines, only: %i[index show] do
+    collection do
+      get "search"
+    end
+  end
   resources :wineries, only: %i[index show]
   resources :varieties, only: %i[index show]
   resources :regions, only: %i[index show]
