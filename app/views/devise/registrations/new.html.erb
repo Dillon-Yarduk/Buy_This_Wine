@@ -14,6 +14,11 @@
   </div>
 
   <div class="field">
+  <%= f.label :province_id %><br />
+    <%= f.collection_select( :province_id, Province.all.order(:name),:id,:name) %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>

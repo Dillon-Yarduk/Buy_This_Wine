@@ -6,14 +6,8 @@
   <h4><%= link_to wine.winery.name, wine.winery %></h4>
   <p>Price: <%= number_to_currency wine.price / 100.0 %></p>
   <p><%= wine.description %></p>
-  <% if cart.include?(wine) %>
-    <%= button_to cart_path(wine), method: :delete do %>
-      Remove from cart
-    <% end %>
-  <% else %>
-    <%= form_with url: cart_index_path, method: :post do %>
-      <%= hidden_field_tag(:id, wine.id) %>
-      <%= button_tag 'Add to Cart' %>
-    <% end %>
+  <%= form_with url: cart_index_path, method: :post do %>
+    <%= hidden_field_tag(:id, wine.id) %>
+    <%= button_tag 'Add to Cart' %>
   <% end %>
 </div>

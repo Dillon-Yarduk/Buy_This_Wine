@@ -27,8 +27,17 @@
         <% end %>
       </li>
       <li>
-        <%= image_tag("cart.png", width:60) %>
-      </li>
+          <%= image_tag("cart.png", width:35) %>
+        </li>
+      <% if customer_signed_in? %>
+        <li>
+          <%= link_to "Sign Out", destroy_customer_session_path, :method => :delete, class: "btn btn-danger" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Sign In", customer_session_path, :method => :post, class: "btn btn-success" %>
+        </li>
+      <% end %>
     </ul>
   </nav>
     <%= yield %>
