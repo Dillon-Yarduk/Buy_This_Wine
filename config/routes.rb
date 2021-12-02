@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :wineries, only: %i[index show]
   resources :varieties, only: %i[index show]
   resources :regions, only: %i[index show]
+  resources :cart, only: %i[create destroy]
   root to: "wines#index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

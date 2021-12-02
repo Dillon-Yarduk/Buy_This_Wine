@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
   private
 
   def initialize_session
-    sesssion[:shopping_cart] ||= []
+    session[:shopping_cart] ||= []
   end
 
   def cart
-    Wine.find(:shopping_cart)
+    Wine.find(session[:shopping_cart])
   end
 end
