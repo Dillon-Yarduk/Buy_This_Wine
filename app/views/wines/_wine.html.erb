@@ -4,10 +4,22 @@
   <% end %>
   <h3><%= link_to wine.name, wine %><%= ", #{wine.variety.name}" %></h3>
   <h4><%= link_to wine.winery.name, wine.winery %></h4>
-  <p>Price: <%= number_to_currency wine.price / 100.0 %></p>
+  <p>Price: <%= number_to_currency wine.price %></p>
   <p><%= wine.description %></p>
-  <%= form_with url: cart_index_path, method: :post do %>
-    <%= hidden_field_tag(:id, wine.id) %>
-    <%= button_tag 'Add to Cart' %>
+  <% wine_order = cart.find{|wo| wo["wine_id"] == wine.id} %>
+  <% if wine_order %>
+    <%= form_with url: cart_path(wine), method: :patch do |f| %>
+      <%= f.select :quantity, (1..200), :selected => wine_order["quantity"] %>
+      <%= button_tag 'Update order' %>
+    <% end %>
+    <%= button_to cart_path(wine), method: :delete do %>
+      Remove from cart
+    <% end %>
+  <% else %>
+    <%= form_with url: cart_index_path, method: :post do |f| %>
+      <%= hidden_field_tag(:id, wine.id) %>
+      <%= f.select :quantity, (1..200) %>
+      <%= button_tag 'Add to Cart' %>
+    <% end %>
   <% end %>
 </div>

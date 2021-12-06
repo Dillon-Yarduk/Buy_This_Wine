@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    Wine.find(session[:shopping_cart])
+    session[:shopping_cart]
   end
 end
