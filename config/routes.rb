@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :wineries, only: %i[index show]
   resources :varieties, only: %i[index show]
   resources :regions, only: %i[index show]
-  resources :cart, only: %i[create update destroy]
+  resources :cart, only: %i[create update destroy index]
   # scope "/checkout" do
   #   post "create" to: "checkout#create", as: "checkout_create"
   #   get "success" to: "checkout#success", as: "checkout_success"

@@ -28,7 +28,7 @@
       </li>
       <% if customer_signed_in? %>
         <li>
-          <%= image_tag("cart.png", width:35) %>
+          <%= link_to image_tag("cart.png", width:35), cart_index_path %>
         </li>
         <li>
           <%= link_to "Sign Out", destroy_customer_session_path, :method => :delete, class: "btn btn-danger" %>

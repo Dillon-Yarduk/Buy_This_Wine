@@ -21,4 +21,17 @@ class CartController < ApplicationController
     session[:shopping_cart].delete(wine_order)
     redirect_to root_path
   end
+
+  def index
+    @orders = []
+    session[:shopping_cart].each do |o|
+      wine = Wine.find(o["wine_id"])
+      quantity = o["quantity"].to_i
+
+      @orders << WineOrder.new(quantity: quantity,
+                               price:    wine.price * quantity,
+                               wine:     wine)
+    end
+    @orders
+  end
 end
