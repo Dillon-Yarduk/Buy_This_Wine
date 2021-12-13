@@ -6,7 +6,7 @@
   <h4><%= link_to wine.winery.name, wine.winery %></h4>
   <p>Price: <%= number_to_currency wine.price %></p>
   <p><%= wine.description %></p>
-  <% wine_order = cart.find{|wo| wo["wine_id"] == wine.id} %>
+  <% wine_order = cart.find{|x| x["wine_id"] == wine.id} %>
   <% if wine_order %>
     <%= form_with url: cart_path(wine), method: :patch do |f| %>
       <%= f.select :quantity, (1..200), :selected => wine_order["quantity"] %>
@@ -16,7 +16,7 @@
       Remove from cart
     <% end %>
   <% else %>
-    <%= form_with url: cart_index_path, method: :post do |f| %>
+    <%= form_with url: customer_signed_in? ? cart_index_path : customer_session_path, method: :post do |f| %>
       <%= hidden_field_tag(:id, wine.id) %>
       <%= f.select :quantity, (1..200) %>
       <%= button_tag 'Add to Cart' %>
