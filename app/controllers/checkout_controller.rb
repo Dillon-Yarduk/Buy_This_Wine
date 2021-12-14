@@ -66,8 +66,8 @@ class CheckoutController < ApplicationController
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
     @order = Order.create(
-      customer:  current_customer,
-      status_id: 1
+      customer: current_customer,
+      status:   Status.find_by(name: "paid")
     )
     @wine_orders = []
     session[:shopping_cart].each do |wo|

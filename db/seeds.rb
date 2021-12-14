@@ -62,7 +62,7 @@ end
 
 puts Province.count
 
-statuses = ["pending", "shipped", "delivered"]
+statuses = ["paid", "shipped", "delivered"]
 
 statuses.each do |s|
   status = Status.create(
