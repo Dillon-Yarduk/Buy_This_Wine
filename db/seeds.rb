@@ -10,8 +10,8 @@ Winery.delete_all
 Variety.delete_all
 Region.delete_all
 
-fileName = Rails.root.join("db/wines.csv")
-csv_data = File.read(fileName)
+file_name = Rails.root.join("db/wines.csv")
+csv_data = File.read(file_name)
 wines = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
 wines.first(150).each do |w|
@@ -42,17 +42,12 @@ wines.first(150).each do |w|
   sleep(1)
 end
 
-puts Wine.count
-puts Variety.count
-puts Winery.count
-puts Region.count
-
-fileName = Rails.root.join("db/provinces.csv")
-csv_data = File.read(fileName)
+file_name = Rails.root.join("db/provinces.csv")
+csv_data = File.read(file_name)
 provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
 provinces.each do |p|
-  province = Province.create(
+  Province.create(
     name: p["name"],
     pst:  p["pst"],
     gst:  p["gst"],
@@ -60,15 +55,18 @@ provinces.each do |p|
   )
 end
 
-puts Province.count
-
 statuses = ["paid", "shipped", "delivered"]
 
 statuses.each do |s|
-  status = Status.create(
+  Status.create(
     name: s
   )
 end
 
-Status.count
-# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# if Rails.env.development?
+#   AdminUser.create!(
+#     email:                 "admin@example.com",
+#     password:              "password",
+#     password_confirmation: "password"
+#   )
+# end
