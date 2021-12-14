@@ -1,0 +1,27 @@
+<div>
+  <% @line_items.each do |line_item| %>
+    <div>
+      <p>
+        <%= "#{line_item.wine.name}, #{line_item.wine.variety.name} -  #{number_to_currency line_item.wine.price} "%>
+        <%= "x #{line_item.quantity}: #{number_to_currency line_item.price}" %>
+      </p>
+    </div>
+  <% end %>
+  <% subtotal = @line_items.inject(0){|sum,x| sum + x.price } %>
+  <% gst = current_customer.province.gst * subtotal %>
+  <% pst = current_customer.province.pst * subtotal %>
+  <% hst = current_customer.province.hst * subtotal %>
+  <p><%= "Subtotal: #{number_to_currency subtotal}"  %></p>
+  <% unless current_customer.province.gst == 0 %>
+    <% subtotal = @line_items.inject(0){|sum,x| sum + x.price }%>
+    <p><%= "GST: #{number_to_currency gst}"  %></p>
+  <% end %>
+  <% unless current_customer.province.pst == 0 %>
+    <p><%= "PST: #{number_to_currency pst}"  %></p>
+  <% end %>
+  <% unless current_customer.province.hst == 0 %>
+    <p><%= "HST: #{number_to_currency hst}"  %></p>
+  <% end %>
+  <p><%= "Total: #{number_to_currency subtotal + gst + pst + hst}" %></p>
+  <%= link_to button_tag("Check Out", class: "btn btn-success"), checkout_create_path, remote: true, method: :post %>
+</div>
