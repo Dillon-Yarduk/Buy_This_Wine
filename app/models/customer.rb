@@ -6,5 +6,5 @@ class Customer < ApplicationRecord
   validates :name, :email, :password, :address, presence: true
   validates :name, uniqueness: true
   belongs_to :province
-  has_many :orders
+  has_many :orders, dependent: nil
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_072256) do
+ActiveRecord::Schema.define(version: 2021_12_14_204556) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_12_02_072256) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["name"], name: "index_customers_on_name", unique: true
     t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 2021_12_02_072256) do
     t.decimal "hst"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_provinces_on_name", unique: true
   end
 
   create_table "regions", force: :cascade do |t|
@@ -111,18 +113,21 @@ ActiveRecord::Schema.define(version: 2021_12_02_072256) do
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_regions_on_name", unique: true
   end
 
   create_table "statuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_statuses_on_name", unique: true
   end
 
   create_table "varieties", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_varieties_on_name", unique: true
   end
 
   create_table "views", force: :cascade do |t|
@@ -152,6 +157,7 @@ ActiveRecord::Schema.define(version: 2021_12_02_072256) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_wineries_on_name", unique: true
   end
 
   create_table "wines", force: :cascade do |t|
