@@ -11,8 +11,6 @@ class WinesController < ApplicationController
     wildcard_search = "%#{params[:keywords]}%"
     variety_id = params[:variety_id]
     @wines = Wine.where("name LIKE ? OR description LIKE ?", wildcard_search, wildcard_search)
-    unless variety_id.empty?
-      @wines = @wines.where("variety_id = ?", variety_id)
-    end
+    @wines = @wines.where("variety_id = ?", variety_id) unless variety_id.empty?
   end
 end
