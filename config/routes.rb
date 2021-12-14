@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "wine_orders/index"
+  get "wine_orders/show"
+  get "orders/index"
+  get "orders/show"
   devise_for :views
   devise_for :customers
   get "regions/index"
