@@ -1,3 +1,19 @@
-<section>
-  <%= render @order %>
-</section>
+<div>
+  <p><%= " #{@order.created_at} -- #{@order.status.name}" %></p>
+  <% @order.wine_orders.each do |wine_order| %>
+    <p>
+      <%= "#{wine_order.wine.name}, #{wine_order.wine.variety.name}: #{wine_order.wine.price} X #{wine_order.quantity} = #{wine_order.price}" %>
+    </p>
+  <% end %>
+  <p><%= "Subtotal: #{@order.subtotal}" %></p>
+  <% unless @order.gst.zero? %>
+    <p><%= "GST: #{@order.gst}" %></p>
+  <% end %>
+  <% unless @order.pst.zero? %>
+    <p><%= "PST: #{@order.pst}" %></p>
+  <% end %>
+  <% unless @order.hst.zero? %>
+    <p><%= "HST: #{@order.hst}" %></p>
+  <% end %>
+  <p><%= "Total: #{@order.total}" %></p>
+</div>

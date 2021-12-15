@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get "search"
     end
   end
+  resources :orders, only: %i[index show]
   resources :wineries, only: %i[index show]
   resources :varieties, only: %i[index show]
   resources :regions, only: %i[index show]

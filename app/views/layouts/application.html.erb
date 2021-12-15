@@ -19,6 +19,9 @@
       <li class="nav-item nav-link"><%= link_to 'Varieties', varieties_path %></li>
       <li class="nav-item nav-link"><%= link_to 'Wineries', wineries_path %></li>
       <li class="nav-item nav-link"><%= link_to 'Regions', regions_path %></li>
+      <% if customer_signed_in? %>
+        <li class="nav-item nav-link"><%= link_to 'Your Orders', orders_path %></li>
+      <% end %>
       <li>
         <%= form_with(url: search_wines_path, method: :get, local: true) do  |f|%>
           <%= f.collection_select( :variety_id, Variety.all.order(:name),:id,:name, {:include_blank => 'All Varieties',:selected => yield(:searched_variety_id)}) %>

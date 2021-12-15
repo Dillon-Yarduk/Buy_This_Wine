@@ -1,3 +1,8 @@
-<section>
-  <%= render @orders %>
-</section>
+<% @orders.each do |order| %>
+  <div>
+    <p>
+      <%= link_to order.created_at, order %>
+      <%= " -- #{order.status.name} -- #{number_to_currency order.total}" %>
+    </p>
+  </div>
+<% end %>
