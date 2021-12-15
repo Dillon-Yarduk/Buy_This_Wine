@@ -94,7 +94,7 @@ class CheckoutController < ApplicationController
     session[:shopping_cart] = []
 
     flash[:notice] = "Order Completed Successfully!!!!!!1!"
-    redirect_to orders_show_path(order, id: order.id)
+    redirect_to order
   end
 
   def cancel; end
