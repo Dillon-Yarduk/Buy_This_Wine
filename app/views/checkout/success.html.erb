@@ -1,2 +1,8 @@
 <h1>Congrats you bought some wine!</h1>
-<%= @order.status.name %>
+<p><%= @order.created_at %></p>
+<p><%= @order.status.name %></p>
+<% @order.wine_orders.each do |wine_order| %>
+  <p><%= "#{wine_order.wine.name}, #{wine_order.wine.variety.name}: X #{wine_order.quantity}: #{number_to_currency wine_order.price}" %></p>
+<% end %>
+<%= debug @wine_orders %>
+<%= debug session[:shopping_cart] %>

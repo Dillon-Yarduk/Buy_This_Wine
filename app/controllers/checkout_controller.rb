@@ -65,26 +65,35 @@ class CheckoutController < ApplicationController
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
-    @order = Order.create(
+    order = Order.create!(
       customer: current_customer,
-      status:   Status.find_by(name: "paid")
+      status:   Status.find_by(name: "paid"),
+      subtotal: 0,
+      gst:      0,
+      pst:      0,
+      hst:      0,
+      total:    0
     )
-    @wine_orders = []
+    wine_orders = []
     session[:shopping_cart].each do |wo|
       wine = Wine.find(wo["wine_id"])
       quantity = wo["quantity"].to_i
-      @wine_orders << WineOrder.create(
-        quantity: wo["quantity"],
-        price:    wine.price * quantity,
+      wine_orders << WineOrder.create!(
         wine:     wine,
-        order_id: @order.id
+        order:    order,
+        quantity: quantity,
+        price:    wine.price * quantity
       )
     end
-    @order.subtotal = @wine_orders.inject(0) { |sum, x| sum + x.price }
-    @order.gst = @order.subtotal * @order.customer.province.gst
-    @order.pst = @order.subtotal * @order.customer.province.pst
-    @order.hst = @order.subtotal * @order.customer.province.hst
-    @order.total = @order.subtotal + @order.gst + @order.pst + @order.hst
+    order.subtotal = wine_orders.inject(0) { |sum, x| sum + x.price }
+    order.gst = order.subtotal * order.customer.province.gst
+    order.pst = order.subtotal * order.customer.province.pst
+    order.hst = order.subtotal * order.customer.province.hst
+    order.total = order.subtotal + order.gst + order.pst + order.hst
+    order.save
+    session[:shopping_cart] = []
+
+    redirect_to orders_show_path(order, id: order.id)
   end
 
   def cancel; end
