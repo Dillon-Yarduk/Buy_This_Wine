@@ -2,18 +2,23 @@
   <p><%= " #{@order.created_at} -- #{@order.status.name}" %></p>
   <% @order.wine_orders.each do |wine_order| %>
     <p>
-      <%= "#{wine_order.wine.name}, #{wine_order.wine.variety.name}: #{wine_order.wine.price} X #{wine_order.quantity} = #{wine_order.price}" %>
+      <%=
+        "#{wine_order.wine.name},
+        #{wine_order.wine.variety.name}:
+        #{number_to_currency wine_order.wine.price} X
+        #{wine_order.quantity} =
+        #{number_to_currency wine_order.price}" %>
     </p>
   <% end %>
-  <p><%= "Subtotal: #{@order.subtotal}" %></p>
+  <p><%= "Subtotal: #{number_to_currency @order.subtotal}" %></p>
   <% unless @order.gst.zero? %>
-    <p><%= "GST: #{@order.gst}" %></p>
+    <p><%= "GST: #{number_to_currency @order.gst}" %></p>
   <% end %>
   <% unless @order.pst.zero? %>
-    <p><%= "PST: #{@order.pst}" %></p>
+    <p><%= "PST: #{number_to_currency @order.pst}" %></p>
   <% end %>
   <% unless @order.hst.zero? %>
-    <p><%= "HST: #{@order.hst}" %></p>
+    <p><%= "HST: #{number_to_currency @order.hst}" %></p>
   <% end %>
-  <p><%= "Total: #{@order.total}" %></p>
+  <p><%= "Total: #{number_to_currency @order.total}" %></p>
 </div>
