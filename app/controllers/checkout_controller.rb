@@ -93,6 +93,7 @@ class CheckoutController < ApplicationController
     order.save
     session[:shopping_cart] = []
 
+    flash[:notice] = "Order Completed Successfully!!!!!!1!"
     redirect_to orders_show_path(order, id: order.id)
   end
 
