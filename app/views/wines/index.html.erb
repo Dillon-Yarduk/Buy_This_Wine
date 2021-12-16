@@ -1,5 +1,11 @@
-<section>
+<section class="container">
   <%= paginate @wines %>
-  <%= render @wines %>
+    <% @wines.in_groups_of(3, false) do |wines| %>
+    <div class="row">
+      <% wines.each do |wine| %>
+        <div class="col-xs-6 col-md-4"><%= render wine %></div>
+      <% end %>
+    <% end %>
+  </div>
   <%= paginate @wines %>
 </section>

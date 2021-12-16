@@ -1,6 +1,6 @@
-<div>
+<div class="border">
   <% if wine.image.present? %>
-    <p><%= image_tag wine.image.variant(resize_to_limit: [285, 285]).processed  %></p>
+    <p><%= image_tag(wine.image.variant(resize_to_limit: [285, 285]).processed, alt: "Wine Image")  %></p>
   <% end %>
   <h3><%= link_to wine.name, wine %><%= ", #{wine.variety.name}" %></h3>
   <h4><%= link_to wine.winery.name, wine.winery %></h4>
@@ -19,7 +19,7 @@
     <%= form_with url: customer_signed_in? ? cart_index_path : customer_session_path, method: :post do |f| %>
       <%= hidden_field_tag(:id, wine.id) %>
       <%= f.select :quantity, (1..200) %>
-      <%= button_tag 'Add to Cart' %>
+      <%= button_tag 'Add to Cart', class: "btn btn-success" %>
     <% end %>
   <% end %>
 </div>
