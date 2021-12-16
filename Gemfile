@@ -64,3 +64,4 @@ gem 'stripe'
 
 gem 'rubocop'
 gem 'rubocop-rails'
+gem 'pg'
